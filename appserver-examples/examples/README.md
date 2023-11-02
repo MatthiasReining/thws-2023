@@ -6,3 +6,34 @@
 
 Alternative: use the IDE tools to create a new project via a _maven_ archetype.
 
+# Servlets
+
+## Example
+
+Example URL: `http://localhost:8080/examples/example1?page=1&offset=10`
+
+## Status
+
+Example URL: `http://localhost:8080/examples/status`
+
+Hints:
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+
+### Internal Server Error (Status Code 500)
+
+Example URL: http://localhost:8080/examples/status?throw-error
+
+## Redirect
+
+Example URL: `http://localhost:8080/examples/redirect` --> google
+Example URL: `http://localhost:8080/examples/redirect?location=https://thws.de` --> thws.de
+Example URL: `http://localhost:8080/examples/redirect?location=/examples/api/hello`
+
+## Server-Side Include
+
+Example URL: `http://localhost:8080/examples/ssi`
+
+## POST
+
+Example URL: `http://localhost:8080/examples/post?key1=value1&key2=value2`
+
