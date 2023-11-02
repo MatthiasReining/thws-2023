@@ -37,3 +37,10 @@ Example URL: `http://localhost:8080/examples/ssi`
 
 Example URL: `http://localhost:8080/examples/post?key1=value1&key2=value2`
 
+Example URL: `http://localhost:8080/examples/index.html`
+
+## Thread Safe Servlets
+
+A NON thread safe servlet
+
+Example URL: `http://localhost:8080/examples/tss`
