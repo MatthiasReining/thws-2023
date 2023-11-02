@@ -43,4 +43,10 @@ Example URL: `http://localhost:8080/examples/index.html`
 
 A NON thread safe servlet
 
-Example URL: `http://localhost:8080/examples/tss`
+Example URL: `http://localhost:8080/examples/tss
+
+# WebFilter
+
+-> PerformanceFilter
+-> EdgeBlockerFilter
+
