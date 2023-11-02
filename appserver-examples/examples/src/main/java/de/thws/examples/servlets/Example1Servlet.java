@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("example1")
+@WebServlet("/example1")
 public class Example1Servlet extends HttpServlet {
 
     @Override

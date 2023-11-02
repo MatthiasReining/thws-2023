@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("status")
+@WebServlet("/status")
 public class StatusServlet extends HttpServlet {
 
     @Override
