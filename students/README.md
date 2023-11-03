@@ -21,3 +21,11 @@ https://quarkus.io/guides/rest-json#json
 
 
 http://localhost:8080/students/...
+
+## Open API
+
+just add the dependency:
+
+http://localhost:8080/q/dev-ui/extensions
+
+--> http://localhost:8080/q/swagger-ui/
