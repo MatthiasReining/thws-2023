@@ -27,9 +27,16 @@ public class StudentResource {
     }
 
     @GET
-    @Path("{studentNumber}")
-    public Student getStudent(@PathParam("studentNumber") @Min(99999) Integer studentNumber) {
+    @Path("todo-rework-endpoint/{studentNumber}")
+    public Student getStudentByStudentNumber(@PathParam("studentNumber") @Min(99999) Integer studentNumber) {
         return studentService.findByStudentNumber(studentNumber);
+    }
+
+    
+    @GET
+    @Path("{id}")
+    public Student getStudent(@PathParam("id") Long id) {
+        return studentService.findById(id);
     }
 
     @GET
