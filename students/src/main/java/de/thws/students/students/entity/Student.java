@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -41,8 +42,10 @@ public class Student {
     private ZonedDateTime created;
     private ZonedDateTime updated;
 
+    @PreUpdate
     @PrePersist
     void setTimeStamps() {
+        System.out.println("pre persit");
         if (created == null)
             created = ZonedDateTime.now();
         updated = ZonedDateTime.now();
