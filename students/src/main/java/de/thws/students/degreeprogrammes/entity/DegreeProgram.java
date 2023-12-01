@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import de.thws.students.students.entity.Student;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +25,9 @@ public class DegreeProgram {
 
     @NotEmpty
     private String name;
+
+    @NotEmpty
+    private String key;
 
     private String boss;
 

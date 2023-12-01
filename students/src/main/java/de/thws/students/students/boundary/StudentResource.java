@@ -3,6 +3,8 @@ package de.thws.students.students.boundary;
 import java.util.List;
 
 import de.thws.students.students.control.StudentService;
+import de.thws.students.students.dto.StudentCreateDTO;
+import de.thws.students.students.dto.StudentDTO;
 import de.thws.students.students.entity.Student;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -22,7 +24,7 @@ public class StudentResource {
     StudentService studentService;
 
     @POST
-    public Student createStudent(@Valid Student student) {
+    public StudentDTO createStudent(@Valid StudentCreateDTO student) {
         return studentService.persist(student);
     }
 

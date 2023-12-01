@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import de.thws.students.degreeprogrammes.entity.DegreeProgram;
+import de.thws.students.students.dto.StudentCreateDTO;
+import de.thws.students.students.dto.StudentDTO;
 import de.thws.students.students.dto.ThwsValidationDTO;
 import de.thws.students.students.entity.Student;
+import de.thws.students.students.entity.StudentStatus;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -34,14 +39,27 @@ public class StudentService {
     }
 
     @Transactional
-    public Student persist(Student student) {
+    public StudentDTO persist(StudentCreateDTO student) {
 
-        DegreeProgram dp = new DegreeProgram();
-        dp.setName("Informatik");
+        Student newStudent = new Student();
+        newStudent.setAddressLine1(student.getAddressLine1());
+        newStudent.setAddressLine2(student.getAddressLine2());
+        newStudent.setBirthday(student.getBirthday());
+        newStudent.setFirstName(student.getFirstName());
+        newStudent.setLastName(student.getLastName());
+        newStudent.setPrivateEmail(student.getPrivateEmail());
 
-        student.setDegreeProgram(dp);
+        // TODO load DegreeProgram by degreeProgramKey
+        DegreeProgram dp = null;
 
-        return em.merge(student);
+        newStudent.setDegreeProgram(dp);
+        newStudent.setStudentNumber(RandomStringUtils.randomAlphanumeric(10).toUpperCase());
+
+        String email = student.getFirstName().toLowerCase() + "." + student.getLastName().toLowerCase() + "@thws.de";
+        newStudent.setEmail(email);
+        newStudent.setStatus(StudentStatus.ACTIVE);
+
+        return em.merge(newStudent).toDTO();
     }
 
     @Transactional

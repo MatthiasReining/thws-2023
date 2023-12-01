@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 import de.thws.students.degreeprogrammes.entity.DegreeProgram;
+import de.thws.students.students.dto.StudentDTO;
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,8 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,7 @@ public class Student {
     @GeneratedValue
     private Long id;
 
-    private Integer studentNumber;
+    private String studentNumber;
 
     @NotBlank
     private String firstName;
@@ -39,9 +40,11 @@ public class Student {
     private String addressLine1;
     private String addressLine2;
     private LocalDate birthday;
-    @Email
+    @NotEmpty
     private String email;
-    private String status;
+    @NotEmpty
+    private String privateEmail;
+    private StudentStatus status;
 
     private ZonedDateTime created;
     private ZonedDateTime updated;
@@ -59,4 +62,20 @@ public class Student {
         updated = ZonedDateTime.now();
     }
 
+    public StudentDTO toDTO() {
+        return StudentDTO.builder()
+                .addressLine1(this.getAddressLine1())
+                .addressLine2(this.getAddressLine2())
+                .birthday(this.getBirthday())
+                .created(this.getCreated())
+                .degreeProgram(this.getDegreeProgram())
+                .email(this.getEmail())
+                .firstName(this.getFirstName())
+                .lastName(this.getLastName())
+                .privateEmail(this.getPrivateEmail())
+                .status(this.getStatus())
+                .studentNumber(this.getStudentNumber())
+                .updated(this.getUpdated())
+                .build();
+    }
 }
