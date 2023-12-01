@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.NotBlank;
@@ -25,7 +27,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@NamedQueries({
+        @NamedQuery(name = Student.FIND_BY_STUDENT_NUMBER, query = "SELECT s FROM Student s WHERE s.studentNumber = :"
+                + Student.PARAM_STUDENT_NUMBER),
+        @NamedQuery(name = Student.FIND_ALL, query = "SELECT s FROM Student s")
+})
+
 public class Student {
+    public static final String FIND_ALL = "Student.findAll";
+    public static final String FIND_BY_STUDENT_NUMBER = "Student.findByStudentNumber";
+    public static final String PARAM_STUDENT_NUMBER = "studentNumber";
 
     @Id
     @GeneratedValue

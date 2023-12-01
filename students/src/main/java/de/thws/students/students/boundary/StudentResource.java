@@ -8,7 +8,6 @@ import de.thws.students.students.dto.StudentDTO;
 import de.thws.students.students.entity.Student;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -29,17 +28,11 @@ public class StudentResource {
     }
 
     @GET
-    @Path("todo-rework-endpoint/{studentNumber}")
-    public Student getStudentByStudentNumber(@PathParam("studentNumber") @Min(99999) Integer studentNumber) {
+    @Path("/{studentNumber}")
+    public StudentDTO getStudentByStudentNumber(@PathParam("studentNumber") String studentNumber) {
         return studentService.findByStudentNumber(studentNumber);
     }
 
-    
-    @GET
-    @Path("{id}")
-    public Student getStudent(@PathParam("id") Long id) {
-        return studentService.findById(id);
-    }
 
      
     @PUT
@@ -49,7 +42,7 @@ public class StudentResource {
     }
 
     @GET
-    public List<Student> list(@QueryParam("limit") @DefaultValue("20") int limit,
+    public List<StudentDTO> list(@QueryParam("limit") @DefaultValue("20") int limit,
             @QueryParam("offset") @DefaultValue("0") int offset) {
 
         return studentService.list(limit, offset);

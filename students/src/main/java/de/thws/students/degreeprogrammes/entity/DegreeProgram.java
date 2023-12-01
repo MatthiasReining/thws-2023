@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -16,7 +17,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@NamedQuery(name = DegreeProgram.FIND_BY_KEY, query = "SELECT dp FROM DegreeProgram dp WHERE dp.key = :"
+        + DegreeProgram.PARAM_KEY)
 public class DegreeProgram {
+
+    public static final String FIND_BY_KEY = "DegreeProgram.FindByKey";
+    public static final String PARAM_KEY = "key";
 
     @Id
     @GeneratedValue

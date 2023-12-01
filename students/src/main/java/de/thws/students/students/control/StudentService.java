@@ -1,13 +1,11 @@
 package de.thws.students.students.control;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import de.thws.students.degreeprogrammes.control.DegreeProgramService;
 import de.thws.students.degreeprogrammes.entity.DegreeProgram;
-import de.thws.students.students.boundary.DegreeProgramService;
 import de.thws.students.students.dto.StudentCreateDTO;
 import de.thws.students.students.dto.StudentDTO;
 import de.thws.students.students.dto.ThwsValidationDTO;
@@ -28,19 +26,23 @@ public class StudentService {
     @Inject
     DegreeProgramService dps;
 
-    static Map<Integer, Student> studentDb = new HashMap<>();
-
     public Student findById(Long id) {
         return em.find(Student.class, id);
     }
 
-    public Student findByStudentNumber(Integer studentNumber) {
-        return studentDb.get(studentNumber);
+    public StudentDTO findByStudentNumber(String studentNumber) {
+        return em.createNamedQuery(Student.FIND_BY_STUDENT_NUMBER, Student.class)
+                .setParameter(Student.PARAM_STUDENT_NUMBER, studentNumber)
+                .getSingleResult()
+                .toDTO();
     }
 
-    public List<Student> list(int limit, int offset) {
+    public List<StudentDTO> list(int limit, int offset) {
+        // TODO add pagination with limit and offset
+        return em.createNamedQuery(Student.FIND_ALL, Student.class)
+                .getResultStream().map(s -> s.toDTO())
+                .toList();
 
-        return studentDb.values().stream().toList();
     }
 
     @Transactional

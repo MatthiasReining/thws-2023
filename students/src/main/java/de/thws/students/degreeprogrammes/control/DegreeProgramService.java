@@ -1,4 +1,4 @@
-package de.thws.students.students.boundary;
+package de.thws.students.degreeprogrammes.control;
 
 import de.thws.students.degreeprogrammes.entity.DegreeProgram;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -13,8 +13,8 @@ public class DegreeProgramService {
 
     public DegreeProgram findByKey(String key) {
 
-        return em.createQuery("SELECT dp FROM DegreeProgram dp WHERE dp.key = :key", DegreeProgram.class)
-                .setParameter("key", key)
+        return em.createNamedQuery(DegreeProgram.FIND_BY_KEY, DegreeProgram.class)
+                .setParameter(DegreeProgram.PARAM_KEY, key)
                 .getSingleResult();
 
     }
