@@ -1,12 +1,11 @@
 package de.thws.students.degreeprogrammes.entity;
 
 import java.util.List;
-import java.util.UUID;
 
+import de.thws.students.degreeprogrammes.dto.DegreeProgramDTO;
 import de.thws.students.students.entity.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -20,8 +19,8 @@ import lombok.Setter;
 public class DegreeProgram {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue
+    private Long id;
 
     @NotEmpty
     private String name;
@@ -34,4 +33,12 @@ public class DegreeProgram {
     @OneToMany
     @JoinColumn(name = "degreeprogram_id")
     private List<Student> students;
+
+    public DegreeProgramDTO toDTO() {
+        return DegreeProgramDTO.builder()
+                .boss(boss)
+                .key(key)
+                .name(name)
+                .build();
+    }
 }

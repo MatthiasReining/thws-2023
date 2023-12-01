@@ -40,3 +40,26 @@ http://localhost:8080/q/dev-ui/extensions
     * Subscription
     * Resource Group https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal
     * App Instances https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal
+
+
+# JPA
+
+see slides
+
+* ORM -> Object Relational Mapping
+* OneToMany, ManyToOne / JoinColumn
+* NamedQueries
+
+JPA Entities within the REST (JAX-RS) interface ??? --> Cycles -> JsonTransient -> but... -> DTOs
+
+
+# DTOs
+
+Why DTOs?
+* better API interface,
+* more specific interface
+
+But... how to map: hand made :-( or --> mapstruct
+Why is mapstruct better than Dozer? --> Dozer Reflection -> MapStruct at BuildTime
+
+

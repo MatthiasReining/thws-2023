@@ -7,12 +7,14 @@ import java.util.Map;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import de.thws.students.degreeprogrammes.entity.DegreeProgram;
+import de.thws.students.students.boundary.DegreeProgramService;
 import de.thws.students.students.dto.StudentCreateDTO;
 import de.thws.students.students.dto.StudentDTO;
 import de.thws.students.students.dto.ThwsValidationDTO;
 import de.thws.students.students.entity.Student;
 import de.thws.students.students.entity.StudentStatus;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -22,6 +24,9 @@ public class StudentService {
 
     @PersistenceContext
     EntityManager em;
+
+    @Inject
+    DegreeProgramService dps;
 
     static Map<Integer, Student> studentDb = new HashMap<>();
 
@@ -49,8 +54,7 @@ public class StudentService {
         newStudent.setLastName(student.getLastName());
         newStudent.setPrivateEmail(student.getPrivateEmail());
 
-        // TODO load DegreeProgram by degreeProgramKey
-        DegreeProgram dp = null;
+        DegreeProgram dp = dps.findByKey(student.getDegreeProgramKey());
 
         newStudent.setDegreeProgram(dp);
         newStudent.setStudentNumber(RandomStringUtils.randomAlphanumeric(10).toUpperCase());

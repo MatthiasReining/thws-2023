@@ -68,7 +68,7 @@ public class Student {
                 .addressLine2(this.getAddressLine2())
                 .birthday(this.getBirthday())
                 .created(this.getCreated())
-                .degreeProgram(this.getDegreeProgram())
+                .degreeProgram(this.getDegreeProgram().toDTO())
                 .email(this.getEmail())
                 .firstName(this.getFirstName())
                 .lastName(this.getLastName())
