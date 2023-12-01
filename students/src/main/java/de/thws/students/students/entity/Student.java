@@ -3,9 +3,13 @@ package de.thws.students.students.entity;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
+import de.thws.students.degreeprogrammes.entity.DegreeProgram;
+import jakarta.json.bind.annotation.JsonbTransient;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.Email;
@@ -41,6 +45,10 @@ public class Student {
 
     private ZonedDateTime created;
     private ZonedDateTime updated;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonbTransient
+    private DegreeProgram degreeProgram;
 
     @PreUpdate
     @PrePersist

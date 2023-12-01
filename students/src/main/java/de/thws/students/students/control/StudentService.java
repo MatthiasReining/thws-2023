@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.thws.students.degreeprogrammes.entity.DegreeProgram;
 import de.thws.students.students.dto.ThwsValidationDTO;
 import de.thws.students.students.entity.Student;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -34,6 +35,12 @@ public class StudentService {
 
     @Transactional
     public Student persist(Student student) {
+
+        DegreeProgram dp = new DegreeProgram();
+        dp.setName("Informatik");
+
+        student.setDegreeProgram(dp);
+
         return em.merge(student);
     }
 
