@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.thws.students.students.dto.ThwsValidationDTO;
 import de.thws.students.students.entity.Student;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
@@ -18,11 +19,6 @@ public class StudentService {
 
     static Map<Integer, Student> studentDb = new HashMap<>();
 
-    @Transactional
-    public Student persist(Student student) {
-        return em.merge(student);
-    }
-
     public Student findById(Long id) {
         return em.find(Student.class, id);
     }
@@ -34,5 +30,25 @@ public class StudentService {
     public List<Student> list(int limit, int offset) {
 
         return studentDb.values().stream().toList();
+    }
+
+    @Transactional
+    public Student persist(Student student) {
+        return em.merge(student);
+    }
+
+    @Transactional
+    public Student update(Long id, Student student) {
+
+        if (id != student.getId()) {
+            throw new ThwsValidationException(
+                    ThwsValidationDTO.builder()
+                            .errorCode(1234)
+                            .message("There's no match between path id (" + id + ") and student id (" + student.getId()
+                                    + ")")
+                            .build());
+        }
+
+        return em.merge(student);
     }
 }

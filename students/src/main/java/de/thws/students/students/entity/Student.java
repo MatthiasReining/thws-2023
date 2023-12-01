@@ -1,12 +1,12 @@
 package de.thws.students.students.entity;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -37,5 +37,15 @@ public class Student {
     @Email
     private String email;
     private String status;
+
+    private ZonedDateTime created;
+    private ZonedDateTime updated;
+
+    @PrePersist
+    void setTimeStamps() {
+        if (created == null)
+            created = ZonedDateTime.now();
+        updated = ZonedDateTime.now();
+    }
 
 }
