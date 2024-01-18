@@ -20,7 +20,7 @@ public class StudentCreateDTO {
     @NotEmpty
     @Email
     private String privateEmail;
-    // @NotEmpty
+    @NotEmpty
     private String degreeProgramKey;
 
 }

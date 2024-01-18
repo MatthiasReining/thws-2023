@@ -63,3 +63,16 @@ But... how to map: hand made :-( or --> mapstruct
 Why is mapstruct better than Dozer? --> Dozer Reflection -> MapStruct at BuildTime
 
 
+# Create Student via PostMan
+
+`POST: http://localhost:8080/students`
+
+```json
+{
+  "firstName": "Moritz",
+  "lastName": "Mustermann",
+  "privateEmail": "max.mustermann@gmail.com",
+  "birthday": "2001-03-20",
+  "degreeProgramKey": "BIN" 
+}
+```

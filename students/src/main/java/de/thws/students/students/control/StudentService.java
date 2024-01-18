@@ -12,6 +12,7 @@ import de.thws.students.students.dto.ThwsValidationDTO;
 import de.thws.students.students.entity.Student;
 import de.thws.students.students.entity.StudentStatus;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,6 +26,10 @@ public class StudentService {
 
     @Inject
     DegreeProgramService dps;
+
+    @Inject
+    @NewStudentEvent
+    Event<StudentDTO> newStundentEvent;
 
     public Student findById(Long id) {
         return em.find(Student.class, id);
@@ -65,7 +70,21 @@ public class StudentService {
         newStudent.setEmail(email);
         newStudent.setStatus(StudentStatus.ACTIVE);
 
-        return em.merge(newStudent).toDTO();
+        newStudent = em.merge(newStudent);
+
+        StudentDTO dtoPayload = newStudent.toDTO();
+
+        System.out.println("fire new student event");
+        try {
+            newStundentEvent.fire(dtoPayload);
+        } catch (Exception e) {
+            System.out.println("Some of the subscribes is stupid...and produces errors: " + e.getMessage());
+        }
+
+        // Example: student-developers are making mistakes... but student assosiations works :-)
+        //System.out.println(42/0);
+
+        return dtoPayload;
     }
 
     @Transactional
