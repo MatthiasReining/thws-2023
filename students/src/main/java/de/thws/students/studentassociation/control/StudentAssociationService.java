@@ -3,6 +3,10 @@ package de.thws.students.studentassociation.control;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+
 import de.thws.students.studentassociation.entity.StudentAssociationInfo;
 import de.thws.students.students.control.NewStudentEvent;
 import de.thws.students.students.dto.StudentDTO;
@@ -17,6 +21,8 @@ public class StudentAssociationService {
     @Inject
     EntityManager em;
 
+    @Counted(name = "performedChecks", description = "How many weHaveANewStudentEvent checks have been performed.")
+    @Timed(name = "checksTimer", description = "A measure of how long it takes to perform the weHaveANewStudentEvent test.", unit = MetricUnits.MILLISECONDS)
     @Transactional(value = TxType.REQUIRES_NEW)
     public void weHaveANewStudentEvent(@ObservesAsync @NewStudentEvent StudentDTO student) {
 
@@ -53,8 +59,6 @@ public class StudentAssociationService {
 
         System.out.println(LocalDateTime.now() + "Student Association (finished): " + student.getFirstName() + " "
                 + student.getEmail());
-
-        System.out.println(42 / 0);
 
     }
 
