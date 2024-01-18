@@ -64,6 +64,8 @@ public class Student {
     @JsonbTransient
     private DegreeProgram degreeProgram;
 
+    private String firstCourse;
+
     @PreUpdate
     @PrePersist
     void setTimeStamps() {

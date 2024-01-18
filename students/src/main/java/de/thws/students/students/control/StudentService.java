@@ -32,6 +32,9 @@ public class StudentService {
     @NewStudentEvent
     Event<StudentDTO> newStundentEvent;
 
+    @Inject
+    CoursesClient coursesClient;
+
     public Student findById(Long id) {
         return em.find(Student.class, id);
     }
@@ -54,7 +57,12 @@ public class StudentService {
     @Transactional
     public StudentDTO persist(StudentCreateDTO student) {
 
+        // get all courses form Microservice Courses
+        String firstCourse = coursesClient.getFirstCourse("dummy");
+        System.out.println(firstCourse);
+
         Student newStudent = new Student();
+        newStudent.setFirstCourse(firstCourse);
         newStudent.setAddressLine1(student.getAddressLine1());
         newStudent.setAddressLine2(student.getAddressLine2());
         newStudent.setBirthday(student.getBirthday());
