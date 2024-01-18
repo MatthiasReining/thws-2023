@@ -76,3 +76,14 @@ Why is mapstruct better than Dozer? --> Dozer Reflection -> MapStruct at BuildTi
   "degreeProgramKey": "BIN" 
 }
 ```
+# Events
+
+see git commits
+
+
+# Micro Profile
+
+    mvn package
+    docker build -f src/main/docker/Dockerfile.jvm -t quarkus/students-jvm .
+
+    
