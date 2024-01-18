@@ -1,5 +1,6 @@
 package de.thws.students.students.control;
 
+import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.faulttolerance.Retry;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -10,8 +11,9 @@ import jakarta.ws.rs.client.ClientBuilder;
 @RequestScoped
 public class CoursesClient {
 
-    @Retry(maxRetries = 10, delay = 5000)
-    public String getFirstCourse(String degreeProgram) {
+    @Retry(maxRetries = 3, delay = 2000)
+    @Fallback(fallbackMethod = "defaultCourse")
+    public String getFirstCourse() {
         System.out.println("call courses microservice");
 
         ClientBuilder cb = ClientBuilder.newBuilder();
@@ -27,6 +29,10 @@ public class CoursesClient {
         String firstCourse = resultArray.get(0).asJsonObject().getString("name");
 
         return firstCourse;
+    }
+
+    public String defaultCourse() {
+        return "temp. course";
     }
 
 }

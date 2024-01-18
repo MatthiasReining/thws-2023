@@ -58,7 +58,7 @@ public class StudentService {
     public StudentDTO persist(StudentCreateDTO student) {
 
         // get all courses form Microservice Courses
-        String firstCourse = coursesClient.getFirstCourse("dummy");
+        String firstCourse = coursesClient.getFirstCourse();
         System.out.println(firstCourse);
 
         Student newStudent = new Student();
