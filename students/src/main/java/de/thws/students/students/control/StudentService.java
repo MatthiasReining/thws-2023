@@ -1,5 +1,6 @@
 package de.thws.students.students.control;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -74,15 +75,15 @@ public class StudentService {
 
         StudentDTO dtoPayload = newStudent.toDTO();
 
-        System.out.println("fire new student event");
-        try {
-            newStundentEvent.fire(dtoPayload);
-        } catch (Exception e) {
-            System.out.println("Some of the subscribes is stupid...and produces errors: " + e.getMessage());
-        }
+        System.out.println(LocalDateTime.now() + "fire new student event");
 
-        // Example: student-developers are making mistakes... but student assosiations works :-)
-        //System.out.println(42/0);
+        newStundentEvent.fireAsync(dtoPayload);
+
+        // Example: student-developers are making mistakes... but student assosiations
+        // works :-)
+        // System.out.println(42/0);
+
+        System.out.println(LocalDateTime.now() + "new student event fired");
 
         return dtoPayload;
     }
