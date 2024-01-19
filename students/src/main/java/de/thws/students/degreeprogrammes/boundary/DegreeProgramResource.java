@@ -1,7 +1,5 @@
 package de.thws.students.degreeprogrammes.boundary;
 
-import java.util.UUID;
-
 import de.thws.students.degreeprogrammes.entity.DegreeProgram;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -17,7 +15,7 @@ public class DegreeProgramResource {
 
     @GET
     @Path("{id}")
-    public DegreeProgram getDegreeProgram(@PathParam("id") UUID id) {
+    public DegreeProgram getDegreeProgram(@PathParam("id") Long id) {
 
         DegreeProgram dp = em.find(DegreeProgram.class, id);
 

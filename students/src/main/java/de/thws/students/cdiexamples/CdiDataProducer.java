@@ -1,6 +1,5 @@
 package de.thws.students.cdiexamples;
 
-import io.quarkus.arc.DefaultBean;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 

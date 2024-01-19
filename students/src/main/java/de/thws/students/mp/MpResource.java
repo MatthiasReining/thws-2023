@@ -1,7 +1,5 @@
 package de.thws.students.mp;
 
-import java.util.Properties;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import jakarta.annotation.security.RolesAllowed;

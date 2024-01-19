@@ -41,10 +41,10 @@ public class DegreeProgram {
     private List<Student> students;
 
     public DegreeProgramDTO toDTO() {
-        return DegreeProgramDTO.builder()
-                .boss(boss)
-                .key(key)
-                .name(name)
-                .build();
+        DegreeProgramDTO dto = new DegreeProgramDTO();
+        dto.setBoss(boss);
+        dto.setKey(key);
+        dto.setName(name);
+        return dto;
     }
 }

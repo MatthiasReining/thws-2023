@@ -2,7 +2,6 @@ package de.thws.students.cdiexamples.events;
 
 import de.thws.students.students.control.NewStudentEvent;
 import de.thws.students.students.dto.StudentDTO;
-import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.ObservesAsync;
 
 public class EventExample {
